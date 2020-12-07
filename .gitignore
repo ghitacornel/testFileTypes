@@ -1,0 +1,3 @@
+# Project exclude paths
+/testJsonJackson/target/
+/testProperties/target/
