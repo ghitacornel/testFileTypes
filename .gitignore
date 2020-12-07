@@ -1,3 +1,4 @@
-# Project exclude paths
-/testJsonJackson/target/
-/testProperties/target/
+.idea
+target/
+*.iml
+*.log
