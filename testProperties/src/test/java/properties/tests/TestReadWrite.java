@@ -15,6 +15,16 @@ public class TestReadWrite {
         properties.load(TestReadWrite.class.getClassLoader().getResourceAsStream("input.properties"));
 
         Assert.assertEquals("propertyValue", properties.getProperty("propertyName"));
+        Assert.assertEquals("", properties.getProperty("propertyNameWithEmptyValue"));
+
+    }
+
+    @Test
+    public void testReadNotPresentProperty() throws Exception {
+
+        Properties properties = new Properties();
+        properties.load(TestReadWrite.class.getClassLoader().getResourceAsStream("input.properties"));
+
         Assert.assertNull(properties.getProperty("propertyNameNonExistent"));
 
     }
