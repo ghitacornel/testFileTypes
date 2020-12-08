@@ -12,7 +12,7 @@ public class TestWithXML {
     public void testRead() throws Exception {
 
         Properties properties = new Properties();
-        properties.loadFromXML(TestWithXML.class.getClassLoader().getResourceAsStream("expected.xml"));
+        properties.loadFromXML(TestWithXML.class.getClassLoader().getResourceAsStream("test.xml"));
 
         Assert.assertEquals("1", properties.getProperty("propertyNameInteger"));
         Assert.assertEquals("false", properties.getProperty("propertyNameBoolean"));
@@ -37,7 +37,7 @@ public class TestWithXML {
 
         // cannot control order
         // cannot control timestamp
-        String expected = new String(TestWithXML.class.getClassLoader().getResourceAsStream("expected.xml").readAllBytes());
+        String expected = new String(TestWithXML.class.getClassLoader().getResourceAsStream("test.xml").readAllBytes());
         Assert.assertEquals(expected, actual);
 
     }
