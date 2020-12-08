@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-    <comment>comments</comment>
-    <entry key="propertyNameInteger">1</entry>
-    <entry key="propertyNameString">stringValue</entry>
-    <entry key="propertyNameDouble">123.456</entry>
-    <entry key="propertyNameBoolean">false</entry>
+<comment>comments</comment>
+<entry key="propertyNameInteger">1</entry>
+<entry key="propertyNameString">stringValue</entry>
+<entry key="propertyNameDouble">123.456</entry>
+<entry key="propertyNameBoolean">false</entry>
 </properties>
