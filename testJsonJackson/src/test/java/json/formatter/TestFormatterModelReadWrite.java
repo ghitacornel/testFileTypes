@@ -3,6 +3,7 @@ package json.formatter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Test;
+import utils.FileUtils;
 
 public class TestFormatterModelReadWrite {
 
@@ -19,7 +20,7 @@ public class TestFormatterModelReadWrite {
         FormatterModel model = build();
 
         ObjectMapper objectMapper = new ObjectMapper();
-        FormatterModel actual = objectMapper.readValue(new String(TestFormatterModelReadWrite.class.getClassLoader().getResourceAsStream("formatter/expectedFormattedJson.json").readAllBytes()), FormatterModel.class);
+        FormatterModel actual = objectMapper.readValue(FileUtils.read("formatter/expectedFormattedJson.json"), FormatterModel.class);
 
         Assert.assertEquals(model.toString(), actual.toString());
     }
@@ -32,6 +33,6 @@ public class TestFormatterModelReadWrite {
         ObjectMapper objectMapper = new ObjectMapper();
         String string = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(model);
 
-        Assert.assertEquals(new String(TestFormatterModelReadWrite.class.getClassLoader().getResourceAsStream("formatter/expectedFormattedJson.json").readAllBytes()), string);
+        Assert.assertEquals(FileUtils.read("formatter/expectedFormattedJson.json"), string);
     }
 }

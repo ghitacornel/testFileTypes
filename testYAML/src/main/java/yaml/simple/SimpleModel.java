@@ -1,4 +1,4 @@
-package json.simple;
+package yaml.simple;
 
 public class SimpleModel {
 
