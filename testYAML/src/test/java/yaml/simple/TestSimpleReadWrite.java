@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
+import utils.FileUtils;
 
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -14,7 +15,7 @@ public class TestSimpleReadWrite {
 
     @Test
     public void testReadAsMap() {
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("simple_model.yaml");
+        InputStream inputStream = FileUtils.readStream("simple_model.yaml");
         Map<String, Object> map = new Yaml().load(inputStream);
         Assert.assertEquals(10, map.get("propertyInteger"));
         Assert.assertEquals(11.22, map.get("propertyDouble"));
@@ -27,7 +28,7 @@ public class TestSimpleReadWrite {
 
     @Test
     public void testReadAsObject() {
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("simple_model.yaml");
+        InputStream inputStream = FileUtils.readStream("simple_model.yaml");
         Yaml yaml = new Yaml(new Constructor(SimpleModel.class));
         SimpleModel model = yaml.load(inputStream);
 
@@ -55,10 +56,12 @@ public class TestSimpleReadWrite {
         Yaml yaml = new Yaml();
         StringWriter writer = new StringWriter();
         yaml.dump(model, writer);
-        Assert.assertEquals(
-                "{propertyInteger: 10, propertyDouble: 11.22, propertyBoolean: true, propertyString: value,\n" +
-                        "  propertyIntegerObject: 11, propertyDoubleObject: 33.44, propertyBooleanObject: false}\n",
-                writer.toString());
+        String expected = FileUtils.read("testWriteAsMap.yaml");
+        String actual = writer.toString();
+
+        expected = expected.replaceAll("\\n|\\r\\n", "");
+        actual = actual.replaceAll("\\n|\\r\\n", "");
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -76,9 +79,11 @@ public class TestSimpleReadWrite {
         Yaml yaml = new Yaml();
         StringWriter writer = new StringWriter();
         yaml.dump(model, writer);
-        Assert.assertEquals(
-                "!!yaml.simple.SimpleModel {propertyBoolean: true, propertyBooleanObject: false, propertyDouble: 11.22,\n" +
-                        "  propertyDoubleObject: 33.44, propertyInteger: 11, propertyIntegerObject: null, propertyString: value}\n",
-                writer.toString());
+        String expected = FileUtils.read("testWriteAsObject.yaml");
+        String actual = writer.toString();
+
+        expected = expected.replaceAll("\\n|\\r\\n", "");
+        actual = actual.replaceAll("\\n|\\r\\n", "");
+        Assert.assertEquals(expected, actual);
     }
 }
