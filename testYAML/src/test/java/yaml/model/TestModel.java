@@ -33,7 +33,7 @@ public class TestModel {
     @Test
     public void writeAsModel() {
 
-        Model model=new Model();
+        Model model = new Model();
 
         Yaml yaml = new Yaml();
         StringWriter writer = new StringWriter();

@@ -1,2 +1,1 @@
-!!yaml.simple.SimpleModel {propertyBoolean: true, propertyBooleanObject: false, propertyDouble: 11.22,
-  propertyDoubleObject: 33.44, propertyInteger: 11, propertyIntegerObject: null, propertyString: value}
+{propertyBoolean: true, propertyBooleanObject: false, propertyDouble: 11.22, propertyDoubleObject: 33.44,  propertyInteger: 11, propertyIntegerObject: null, propertyString: value}

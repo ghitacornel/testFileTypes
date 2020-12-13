@@ -2,8 +2,10 @@ package yaml.simple;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
+import org.yaml.snakeyaml.nodes.Tag;
 import utils.FileUtils;
 
 import java.io.InputStream;
@@ -54,10 +56,8 @@ public class TestSimpleReadWrite {
         model.put("propertyBooleanObject", false);
 
         Yaml yaml = new Yaml();
-        StringWriter writer = new StringWriter();
-        yaml.dump(model, writer);
         String expected = FileUtils.read("testWriteAsMap.yaml");
-        String actual = writer.toString();
+        String actual = yaml.dumpAs(model, Tag.MAP, DumperOptions.FlowStyle.FLOW);
 
         expected = expected.replaceAll("\\n|\\r\\n", "");
         actual = actual.replaceAll("\\n|\\r\\n", "");
@@ -77,10 +77,8 @@ public class TestSimpleReadWrite {
         model.setPropertyBooleanObject(false);
 
         Yaml yaml = new Yaml();
-        StringWriter writer = new StringWriter();
-        yaml.dump(model, writer);
         String expected = FileUtils.read("testWriteAsObject.yaml");
-        String actual = writer.toString();
+        String actual = yaml.dumpAs(model, Tag.MAP, DumperOptions.FlowStyle.FLOW);// do not write class info
 
         expected = expected.replaceAll("\\n|\\r\\n", "");
         actual = actual.replaceAll("\\n|\\r\\n", "");
