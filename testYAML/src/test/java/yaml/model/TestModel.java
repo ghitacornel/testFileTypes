@@ -2,7 +2,9 @@ package yaml.model;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.nodes.Tag;
 import utils.FileUtils;
 
 import java.io.StringWriter;
@@ -10,6 +12,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 
 public class TestModel {
+
+    Yaml yaml = new Yaml();
 
     static Model build() {
 
@@ -35,12 +39,8 @@ public class TestModel {
 
         Model model = new Model();
 
-        Yaml yaml = new Yaml();
-        StringWriter writer = new StringWriter();
-        yaml.dump(model, writer);
-
         String expected = FileUtils.read("writeAsModel.yaml");
-        String actual = writer.toString();
+        String actual = yaml.dumpAs(model, Tag.MAP, DumperOptions.FlowStyle.BLOCK);// do not write class info
 
         expected = expected.replaceAll("\\n|\\r\\n", "");
         actual = actual.replaceAll("\\n|\\r\\n", "");

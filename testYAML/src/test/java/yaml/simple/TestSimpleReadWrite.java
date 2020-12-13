@@ -9,16 +9,17 @@ import org.yaml.snakeyaml.nodes.Tag;
 import utils.FileUtils;
 
 import java.io.InputStream;
-import java.io.StringWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TestSimpleReadWrite {
 
+    Yaml yaml = new Yaml();
+
     @Test
     public void testReadAsMap() {
         InputStream inputStream = FileUtils.readStream("simple_model.yaml");
-        Map<String, Object> map = new Yaml().load(inputStream);
+        Map<String, Object> map = yaml.load(inputStream);
         Assert.assertEquals(10, map.get("propertyInteger"));
         Assert.assertEquals(11.22, map.get("propertyDouble"));
         Assert.assertEquals(true, map.get("propertyBoolean"));
@@ -55,7 +56,6 @@ public class TestSimpleReadWrite {
         model.put("propertyDoubleObject", 33.44);
         model.put("propertyBooleanObject", false);
 
-        Yaml yaml = new Yaml();
         String expected = FileUtils.read("testWriteAsMap.yaml");
         String actual = yaml.dumpAs(model, Tag.MAP, DumperOptions.FlowStyle.BLOCK);
 
@@ -76,7 +76,6 @@ public class TestSimpleReadWrite {
         model.setPropertyDoubleObject(33.44);
         model.setPropertyBooleanObject(false);
 
-        Yaml yaml = new Yaml();
         String expected = FileUtils.read("testWriteAsObject.yaml");
         String actual = yaml.dumpAs(model, Tag.MAP, DumperOptions.FlowStyle.BLOCK);// do not write class info
 

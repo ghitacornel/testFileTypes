@@ -1,1 +1,5 @@
-!!yaml.model.Model {date: null, innerModel: null, propertyCustomised: null, propertyIgnored: ignored    value, string: null}
+date: null
+innerModel: null
+propertyCustomised: null
+propertyIgnored: ignored value
+string: null
