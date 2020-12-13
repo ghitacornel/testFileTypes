@@ -57,7 +57,7 @@ public class TestSimpleReadWrite {
 
         Yaml yaml = new Yaml();
         String expected = FileUtils.read("testWriteAsMap.yaml");
-        String actual = yaml.dumpAs(model, Tag.MAP, DumperOptions.FlowStyle.FLOW);
+        String actual = yaml.dumpAs(model, Tag.MAP, DumperOptions.FlowStyle.BLOCK);
 
         expected = expected.replaceAll("\\n|\\r\\n", "");
         actual = actual.replaceAll("\\n|\\r\\n", "");
@@ -78,7 +78,7 @@ public class TestSimpleReadWrite {
 
         Yaml yaml = new Yaml();
         String expected = FileUtils.read("testWriteAsObject.yaml");
-        String actual = yaml.dumpAs(model, Tag.MAP, DumperOptions.FlowStyle.FLOW);// do not write class info
+        String actual = yaml.dumpAs(model, Tag.MAP, DumperOptions.FlowStyle.BLOCK);// do not write class info
 
         expected = expected.replaceAll("\\n|\\r\\n", "");
         actual = actual.replaceAll("\\n|\\r\\n", "");

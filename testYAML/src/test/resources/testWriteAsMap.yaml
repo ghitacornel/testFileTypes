@@ -1,1 +1,7 @@
-{propertyInteger: 10, propertyDouble: 11.22, propertyBoolean: true, propertyString: value,  propertyIntegerObject: 11, propertyDoubleObject: 33.44, propertyBooleanObject: false}
+propertyInteger: 10
+propertyDouble: 11.22
+propertyBoolean: true
+propertyString: value
+propertyIntegerObject: 11
+propertyDoubleObject: 33.44
+propertyBooleanObject: false
