@@ -3,6 +3,7 @@ package yaml.model;
 import org.junit.Assert;
 import org.junit.Test;
 import org.yaml.snakeyaml.Yaml;
+import utils.FileUtils;
 
 import java.io.StringWriter;
 import java.time.LocalDate;
@@ -37,9 +38,12 @@ public class TestModel {
         Yaml yaml = new Yaml();
         StringWriter writer = new StringWriter();
         yaml.dump(model, writer);
-        Assert.assertEquals(
-                "!!yaml.simple.SimpleModel {propertyBoolean: true, propertyBooleanObject: false, propertyDouble: 11.22,\n" +
-                        "  propertyDoubleObject: 33.44, propertyInteger: 11, propertyIntegerObject: null, propertyString: value}\n",
-                writer.toString());
+
+        String expected = FileUtils.read("writeAsModel.yaml");
+        String actual = writer.toString();
+
+        expected = expected.replaceAll("\\n|\\r\\n", "");
+        actual = actual.replaceAll("\\n|\\r\\n", "");
+        Assert.assertEquals(expected, actual);
     }
 }
