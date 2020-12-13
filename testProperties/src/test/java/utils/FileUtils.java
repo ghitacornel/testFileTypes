@@ -1,5 +1,6 @@
 package utils;
 
+import java.io.InputStream;
 import java.util.Objects;
 
 public class FileUtils {
@@ -10,5 +11,9 @@ public class FileUtils {
         } catch (Exception e) {
             throw new RuntimeException("cannot read file " + fileName, e);
         }
+    }
+
+    public static InputStream readStream(String fileName) {
+        return FileUtils.class.getClassLoader().getResourceAsStream(fileName);
     }
 }

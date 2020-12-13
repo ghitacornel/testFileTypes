@@ -2,6 +2,7 @@ package properties.tests;
 
 import org.junit.Assert;
 import org.junit.Test;
+import utils.FileUtils;
 
 import java.io.StringWriter;
 import java.util.Properties;
@@ -12,7 +13,7 @@ public class TestReadWrite {
     public void testRead() throws Exception {
 
         Properties properties = new Properties();
-        properties.load(TestReadWrite.class.getClassLoader().getResourceAsStream("input.properties"));
+        properties.load(FileUtils.readStream("input.properties"));
 
         Assert.assertEquals("propertyValue", properties.getProperty("propertyName"));
         Assert.assertEquals("", properties.getProperty("propertyNameWithEmptyValue"));
@@ -23,7 +24,7 @@ public class TestReadWrite {
     public void testReadNotPresentProperty() throws Exception {
 
         Properties properties = new Properties();
-        properties.load(TestReadWrite.class.getClassLoader().getResourceAsStream("input.properties"));
+        properties.load(FileUtils.readStream("input.properties"));
 
         Assert.assertNull(properties.getProperty("propertyNameNonExistent"));
 
@@ -53,13 +54,13 @@ public class TestReadWrite {
         properties.store(writer, "comments");
 
         String actual = writer.toString();
-        String expected = new String(TestReadWrite.class.getClassLoader().getResourceAsStream("expected.properties").readAllBytes());
+        String expected = FileUtils.read("expected.properties");
 
         // cannot control order
         // cannot control timestamp
         // hence hack it for testing purpose and remove comments
-        actual = actual.substring(actual.indexOf("propertyNameString"));
-        expected = expected.substring(expected.indexOf("propertyNameString"));
+        actual = actual.substring(actual.indexOf("property"));
+        expected = expected.substring(expected.indexOf("property"));
 
         Assert.assertEquals(expected, actual);
 
