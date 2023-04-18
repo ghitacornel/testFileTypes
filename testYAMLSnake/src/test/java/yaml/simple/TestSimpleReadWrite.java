@@ -3,6 +3,7 @@ package yaml.simple;
 import org.junit.Assert;
 import org.junit.Test;
 import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.nodes.Tag;
@@ -32,7 +33,7 @@ public class TestSimpleReadWrite {
     @Test
     public void testReadAsObject() {
         InputStream inputStream = FileUtils.readStream("simple_model.yaml");
-        Yaml yaml = new Yaml(new Constructor(SimpleModel.class));
+        Yaml yaml = new Yaml(new Constructor(SimpleModel.class, new LoaderOptions()));
         SimpleModel model = yaml.load(inputStream);
 
         Assert.assertEquals(10, model.getPropertyInteger());
